@@ -1,5 +1,7 @@
 # gib-lang
 
+[![main](https://github.com/symefa/gib-lang/actions/workflows/publish.yml/badge.svg)](https://github.com/symefa/gib-lang/actions/workflows/publish.yml)
+[![PyPI](https://badge.fury.io/py/gib-lang.svg)](https://pypi.org/project/gib-lang/)
 <img width="300" height="300" alt="gib-lang" src="https://github.com/user-attachments/assets/417e1208-173f-46ad-be60-e19ad080582a" />
 
 **Gibberish** a minimalist, dynamic, and turing-complete programming language, it is based on [Reversible BitFuck](https://esolangs.org/wiki/Reversible_Bitfuck). to further reduce it with only 3 instruction.
