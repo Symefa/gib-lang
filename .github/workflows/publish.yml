@@ -2,7 +2,7 @@ name: publish
 
 on:
   push:
-    branches: [publish]
+    branches: [main]
 
 jobs:
   build:
@@ -28,3 +28,4 @@ jobs:
         env:
           FLIT_USERNAME: __token__
           FLIT_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+
