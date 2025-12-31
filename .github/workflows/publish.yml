@@ -1,0 +1,30 @@
+name: publish
+
+on:
+  push:
+    branches: [publish]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: install flit
+        run: pip install flit
+
+      - name: build and publish
+        run: flit publish --pypirc .pypirc
+        env:
+          FLIT_USERNAME: __token__
+          FLIT_PASSWORD: ${{ secrets.PYPI_TOKEN }}

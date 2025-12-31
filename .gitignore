@@ -1,0 +1,8 @@
+.venv
+dist/
+__pycache__/
+
+uv.lock
+.python-version
+.tox/
+.ruff_cache/

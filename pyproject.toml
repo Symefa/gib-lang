@@ -1,0 +1,55 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "gib-lang"
+dynamic = ["version", "description"]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = []
+authors = [{name = "Alifa Izzan Akhsani"}]
+keywords = ["esolang", "turing machine", "interpreter" ,"gibberish"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Interpreters",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Home = "https://github.com/symefa/gib-lang"
+
+[project.scripts]
+gib = "gib_lang:cli.main"
+
+[dependency-groups]
+dev = [
+    "flit-core>=3.12.0",
+    "pytest>=9.0.2",
+    "ruff>=0.14.10",
+    "ty>=0.0.7",
+]
+
+[tool.tox]
+requires = ["tox>=4.0.0"]
+envs = ["py39", "py310", "py311","py312","py313", "py314","lint"]
+
+[tool.tox.env_run_base]
+uv_resolution = "lowest-direct"
+dependency_groups = ["dev"]
+package = "wheel"
+commands = [
+            ["pytest"],
+            ["ty", "check"],
+]
+
+[tool.tox.env.lint]
+dependency_groups = ["dev"]
+package = "wheel"
+commands = [
+            ["ruff","format","--check","./gib_lang"],
+]
+
