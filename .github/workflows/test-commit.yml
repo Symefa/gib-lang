@@ -30,8 +30,9 @@ jobs:
         run: flit install
       - name: lint code
         run: |
-          uv tool run ruff format.
+          uv tool run ruff format
       - name: Run tests
         run: |
           uv tool run ty check 
           uv tool run tox
+
