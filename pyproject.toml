@@ -7,7 +7,7 @@ name = "gib-lang"
 dynamic = ["version", "description"]
 readme = "README.md"
 license = {file = "LICENSE"}
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = []
 authors = [{name = "Alifa Izzan Akhsani"}]
 keywords = ["esolang", "turing machine", "interpreter" ,"gibberish"]
@@ -35,7 +35,7 @@ dev = [
 
 [tool.tox]
 requires = ["tox>=4.0.0"]
-envs = ["py39", "py310", "py311","py312","py313", "py314","lint"]
+envs = ["py310", "py311","py312","py313", "py314","lint"]
 
 [tool.tox.env_run_base]
 uv_resolution = "lowest-direct"
