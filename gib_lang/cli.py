@@ -3,10 +3,9 @@ import logging
 import os
 import sys
 
-from . import Machine, Tape, run, __version__, transpile
+from . import Machine, Tape, run, __version__
 
 pr_ascii = False
-
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -46,31 +45,20 @@ def main() -> None:
     run_parser.add_argument(
         "-c",
         "--ascii",
-        help="Output the tape as an ASCII string",
-        action="store_const",
-        const=not (pr_ascii),
-        default=pr_ascii,
+        action=argparse.BooleanOptionalAction
     )
-
-    trans_parser = subparsers.add_parser(
-        "transpile", help="Transpile Gibberish code to RBF code Vice versa"
-    )
-    trans_parser.add_argument("source", help="The code to transpile")
 
     args = parser.parse_args()
 
     logger = logging.getLogger("gib")
 
-    logger.setLevel(args.log_level)
+    logger.setLevel(args.log_level.upper())
     handler = logging.StreamHandler()
     handler.setFormatter(logging.Formatter("%(levelname)05s %(name)s: %(message)s"))
     logger.addHandler(handler)
 
     if args.subcommand == "run":
         run_main(args, logger)
-    elif args.subcommand == "transpile":
-        transpiled_source = transpile(args.source)
-        pipe_print(transpiled_source)
     else:
         raise ValueError(f"Unknown command: {args.subcommand}")
 
@@ -85,6 +73,23 @@ def pipe_print(*args: object, **kwargs: object) -> None:
         os.dup2(devnull, sys.stdout.fileno())
         sys.exit(1)
 
+def _preprocess(source: str) -> str:
+    source = source.replace("\\n", "\n")
+    raws = source.split("\n")
+    raws = [raw.split("#", 1)[0] for raw in raws]
+    source = "".join(raws)
+    source = source.replace(" ", "")
+    return source
+
+def process_file(path: str) -> str:
+    try:
+        with open(path, 'r') as f:
+            content = f.read()
+            return _preprocess(content)
+    except FileNotFoundError:
+        print(f"Error: The file '{path}' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def run_main(args: argparse.Namespace, logger: logging.Logger) -> None:
     # Check if tape is a string containing only 1s and 0s
@@ -100,22 +105,20 @@ def run_main(args: argparse.Namespace, logger: logging.Logger) -> None:
             f" {machine.steps} {machine.instruction.value} {machine.head:02d} | {tape.head:02d} {tape}"
         )
         return False
-
-    transpiled_source = ""
-    if "FUFU" in args.source or "FAFA" in args.source:
-        logger.debug("Transpiling from Gibberish to RBF")
-        transpiled_source = transpile(args.source)
+    source = ""
+    if args.source.find('/') != -1:
+        source = process_file(args.source)
     else:
-        transpiled_source = args.source
-    logger.debug(f"Transpiled source: {transpiled_source!r}")
+        source = args.source
+
     _machine, tape = run(
-        transpiled_source,
+        _preprocess(source),
         tape,
         max_steps=args.max_steps,
         callback=callback,
     )
 
-    if pr_ascii:
+    if args.ascii:
         pipe_print(tape.to_ascii())
     else:
         pipe_print(tape)

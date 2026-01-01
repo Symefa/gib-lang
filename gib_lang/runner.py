@@ -23,19 +23,19 @@ def run(
                 break
             instruction = machine.instruction
             current_bit = tape.get
-            if instruction == Instruction.TOGGLE:
+            if instruction == Instruction.TOGGLE_HEAD_RIGHT:
                 tape.toggle()
-                machine.move_right()
-            elif instruction == Instruction.HEAD_RIGHT:
                 tape.move_right()
                 machine.move_right()
-            elif instruction == Instruction.HEAD_LEFT:
+            elif instruction == Instruction.HEAD_LEFT_LOOP_START:
                 tape.move_left()
-                machine.move_right()
-            elif instruction == Instruction.LOOP_START:
+                logger.debug(f"Loop start at head {machine.head}, current bit: {current_bit}")
                 machine.loop_start(current_bit)
             elif instruction == Instruction.LOOP_END:
+                logger.debug(f"Loop end at head {machine.head}, current bit: {current_bit}")
                 machine.loop_end(current_bit)
+            elif instruction == Instruction.NO_OP:
+                machine.move_right()
             else:
                 raise ValueError(f"Unknown instruction: {instruction}")
 

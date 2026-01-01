@@ -1,22 +1,6 @@
 import enum
 
-
 class Instruction(enum.Enum):
-    """RBF Instructions"""
-
-    TOGGLE = "*"
-    """Toggle the current tape bit"""
-    HEAD_RIGHT = ">"
-    """Shift the tape head to the right"""
-    HEAD_LEFT = "<"
-    """Shift the tape head to the left"""
-    LOOP_START = "("
-    """Start of a loop, if the current tape bit is 0, jump to the instruction after the matching LOOP_END"""
-    LOOP_END = ")"
-    """End of a loop, if the current tape bit is 0, jump back to the instruction after the matching LOOP_START"""
-
-
-class Syntax(enum.Enum):
     """
     Gibberish Language Syntax
     -------------------------

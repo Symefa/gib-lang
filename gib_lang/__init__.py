@@ -5,15 +5,15 @@ Gibberish Language (gib-lang) interpreter
 based on https://esolangs.org/wiki/Talk:Picofuck#Candidate_languages
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Alifa Izzan Akhsani"
 __license__ = "MIT"
 
-from . import machine, tape, runner, transpiler
+from . import machine, tape, runner
 
 Machine = machine.Machine
 Tape = tape.Tape
 run = runner.run
-transpile = transpiler.transpile
 
-__all__ = ["Machine", "Tape", "run", "transpile"]
+
+__all__ = ["Machine", "Tape", "run"]

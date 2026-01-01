@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+
 from typing import Union, Optional, overload
 import warnings
 
@@ -129,7 +130,7 @@ class Machine(Sequence[Instruction]):
             self._move_left()
 
     def loop_start(self, current_bit: bool) -> None:
-        if self.instruction != Instruction.LOOP_START:
+        if self.instruction != Instruction.HEAD_LEFT_LOOP_START:
             raise ValueError("Not at a loop start.")
 
         self._steps += 1
@@ -138,7 +139,7 @@ class Machine(Sequence[Instruction]):
                 bracket_depth = 1
                 while bracket_depth > 0:
                     self._move_right()
-                    if self.instruction == Instruction.LOOP_START:
+                    if self.instruction == Instruction.HEAD_LEFT_LOOP_START:
                         bracket_depth += 1
                     elif self.instruction == Instruction.LOOP_END:
                         bracket_depth -= 1
@@ -162,7 +163,7 @@ class Machine(Sequence[Instruction]):
                 bracket_depth = 1
                 while bracket_depth > 0:
                     self._move_left()
-                    if self._machine[self._head] == Instruction.LOOP_START:
+                    if self._machine[self._head] == Instruction.HEAD_LEFT_LOOP_START:
                         bracket_depth -= 1
                     elif self._machine[self._head] == Instruction.LOOP_END:
                         bracket_depth += 1
@@ -171,12 +172,15 @@ class Machine(Sequence[Instruction]):
                 raise InvalidInstructionError("Unmatched loop end.") from None
         self._move_right()
 
+def _chunk_string(s, n):
+    return (s[i:i+n] for i in range(0, len(s), n))
 
 def validate_machine(machine: Union[str, Sequence[Instruction]]) -> list[Instruction]:
     valid_instructions: Sequence[Instruction]
     if isinstance(machine, str):
         try:
-            valid_instructions = [Instruction(instruction) for instruction in machine]
+            
+            valid_instructions = [Instruction(instruction) for instruction in _chunk_string(machine, 8)]
         except ValueError as e:
             raise InvalidInstructionError(str(e)) from None
     else:
@@ -184,7 +188,7 @@ def validate_machine(machine: Union[str, Sequence[Instruction]]) -> list[Instruc
 
     depth = 0
     for instruction in valid_instructions:
-        if instruction == Instruction.LOOP_START:
+        if instruction == Instruction.HEAD_LEFT_LOOP_START:
             depth += 1
         elif instruction == Instruction.LOOP_END:
             depth -= 1
