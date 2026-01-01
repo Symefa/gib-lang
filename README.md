@@ -19,6 +19,12 @@ you can run command using
 gib run -t 3 "FAFAFAFA FUFUFAFA FAFAFUFU #toggle head"
 ```
 
+or using file
+
+```sh
+gib run -c -t 88 ./examples/hidup.gb
+```
+
 Here the example instruction combination
 
 ```sh
