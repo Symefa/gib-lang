@@ -1,7 +1,7 @@
 # gib-lang
 
 [![main](https://github.com/symefa/gib-lang/actions/workflows/publish.yml/badge.svg)](https://github.com/symefa/gib-lang/actions/workflows/publish.yml)
-[![PyPI](https://badge.fury.io/py/gib-lang.svg)](https://pypi.org/project/gib-lang/)
+[![PyPI](https://d25lcipzij17d.cloudfront.net/badge.svg?c=eyJhbGciOiJub25lIn0.eyJiIjp7IngiOmZhbHNlLCJ0IjoidjZlIiwibCI6InB5cGkgcGFja2FnZSIsInIiOiIwLjIuMSJ9fQ)](https://pypi.org/project/gib-lang/)
 
 <img width="300" height="300" alt="gib-lang" src="https://github.com/user-attachments/assets/417e1208-173f-46ad-be60-e19ad080582a" />
 
@@ -39,7 +39,8 @@ FAFAFUFU #close loop
 
 The program simulate turing machine with moving head and 1-bit tape
 
-![Presentation1](https://github.com/user-attachments/assets/e00d3278-40a5-4ef2-90df-d9ea3eb752d6)
+![turing](https://github.com/user-attachments/assets/00547bbc-1fd1-44b3-9c0f-6ad997640d0b)
+
 
 ## How to Install
 
