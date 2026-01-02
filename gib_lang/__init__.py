@@ -5,7 +5,7 @@ Gibberish Language (gib-lang) interpreter
 based on https://esolangs.org/wiki/Talk:Picofuck#Candidate_languages
 """
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __author__ = "Alifa Izzan Akhsani"
 __license__ = "MIT"
 

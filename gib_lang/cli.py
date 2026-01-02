@@ -90,6 +90,7 @@ def process_file(path: str) -> str:
         print(f"Error: The file '{path}' was not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
+    return ""
 
 def run_main(args: argparse.Namespace, logger: logging.Logger) -> None:
     # Check if tape is a string containing only 1s and 0s

@@ -134,6 +134,7 @@ class Machine(Sequence[Instruction]):
             raise ValueError("Not at a loop start.")
 
         self._steps += 1
+        
         if not current_bit:
             try:
                 bracket_depth = 1
@@ -179,7 +180,7 @@ def validate_machine(machine: Union[str, Sequence[Instruction]]) -> list[Instruc
     valid_instructions: Sequence[Instruction]
     if isinstance(machine, str):
         try:
-            
+
             valid_instructions = [Instruction(instruction) for instruction in _chunk_string(machine, 8)]
         except ValueError as e:
             raise InvalidInstructionError(str(e)) from None

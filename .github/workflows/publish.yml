@@ -25,6 +25,7 @@ jobs:
 
       - name: build and publish
         run: flit publish --pypirc .pypirc
+        continue-on-error: true
         env:
           FLIT_USERNAME: __token__
           FLIT_PASSWORD: ${{ secrets.PYPI_TOKEN }}
