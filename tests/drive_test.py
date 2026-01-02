@@ -17,7 +17,6 @@ def test_run_toggle() -> None:
         source,
         tape,
         1000,
-        callback=callback,
     )
 
     assert machine == source
