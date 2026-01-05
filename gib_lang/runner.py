@@ -29,6 +29,7 @@ def run(
                 machine.move_right()
             elif instruction == Instruction.HEAD_LEFT_LOOP_START:
                 tape.move_left()
+                current_bit = tape.get
                 logger.debug(f"Loop start at head {machine.head}, current bit: {current_bit}")
                 machine.loop_start(current_bit)
             elif instruction == Instruction.LOOP_END:

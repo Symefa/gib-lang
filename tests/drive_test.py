@@ -12,7 +12,7 @@ def test_run_toggle() -> None:
     assert machine == source
     assert tape == "11111111"
 
-    source = "FAFAFAFAFUFUFAFAFUFUFAFAFAFAFUFUFUFUFAFAFAFAFUFUFAFAFUFU" * 8 
+    source = "FAFAFAFAFUFUFAFAFAFAFUFUFUFUFAFAFAFAFUFU" * 8 
     machine, tape = run(
         source,
         tape,
@@ -20,7 +20,7 @@ def test_run_toggle() -> None:
     )
 
     assert machine == source
-    assert tape == "01010101"
+    assert tape == "00000000"
 
 
 def test_run_callback() -> None:
